@@ -18,12 +18,22 @@ struct AuthorSheetView: View {
         self.author = author
     }
     var body: some View {
-        VStack {
-            Text("\(selectedAuthor!.name)")
-            Divider()
-            ForEach(quotes) { quote in
-                Text("\(selectedAuthor!.quotes)")
-            }
+        ZStack {
+            Image("Edggan")
+                .padding(.top, 100.0)
+            VStack {
+                if let author = selectedAuthor {
+                    Text("\(author.name)")
+                    Divider()
+                    ForEach(quotes) { quote in
+                        Text("\(author.quotes)")
+                }
+                
+                } else {
+                    Text("Kein Author ausgewählt")
+                }
+        }
+            .padding()
         }
         
         .presentationDetents([.medium])
@@ -31,7 +41,7 @@ struct AuthorSheetView: View {
 }
 
 #Preview {
-    AuthorSheetView(author: Author(name: ""))
+    AuthorSheetView(author: Author(name: "", imageAuthor: ""))
         .modelContainer(for: [Author.self, Quote.self], inMemory: true)
         .ignoresSafeArea()
 }

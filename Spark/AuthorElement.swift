@@ -19,7 +19,7 @@ struct AuthorElement: View {
         self.author = author
     }
     var body: some View {
-            NavigationView {
+    
                 VStack {
                     Button(action: {
                         showSheet.toggle()
@@ -46,21 +46,20 @@ struct AuthorElement: View {
                                 }
                             }
                         }
-                        .sheet(item: $selectedAuthor) { detail in
-                            AuthorSheetView(author: detail)
+                        .sheet(isPresented: $showSheet) {
+                            AuthorSheetView(author: author)
                         }
                     }
-                    .sheet(isPresented: $showSheet) {
-                        
-                    }
+                    
                 }
                 .presentationDetents([.medium])
-            }
+            
     }
 }
 
 #Preview {
-    AuthorElement(author: Author(name: ""))
+    AuthorElement(author: Author(name: "", imageAuthor: ""))
         .modelContainer(for: [Author.self, Quote.self], inMemory: true)
         .ignoresSafeArea()
 }
+

@@ -3,7 +3,6 @@
 //  Spark
 
 //  Created by Nico Prinz on 12.11.24.
-
 import SwiftUI
 import SwiftData
 
@@ -65,7 +64,7 @@ struct QuoteElement: View {
 }
 
 #Preview {
-    QuoteElement(quote: Quote(title: "", author: Author(name: ""), isFavorite: false, category: .freiheit))
+    QuoteElement(quote: Quote(title: "", author: Author(name: "", imageAuthor: ""), isFavorite: false, category: .freiheit))
         .modelContainer(for: [Author.self, Quote.self], inMemory: true)
         .ignoresSafeArea()
 }

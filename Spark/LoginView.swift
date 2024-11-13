@@ -88,10 +88,10 @@ struct LoginView: View {
     }
     func saveAllAuthors() {
         let authorss: [Author] = [
-            Author(name: "Albert Einstein"),
-            Author(name: "Mark Twain - Das Genie"),
-            Author(name: "Johann Wolfgang von Goethe"),
-            Author(name: "Friedrich Schiller"),
+            Author(name: "Albert Einstein", imageAuthor: "AlbertEinstein"),
+            Author(name: "Mark Twain - Das Genie", imageAuthor: "MarkTwain"),
+            Author(name: "Johann Wolfgang von Goethe", imageAuthor: "MarkTwain"),
+            Author(name: "Friedrich Schiller", imageAuthor: "MarkTwain"),
         ]
         for author in authorss {
             let newAuthor = author
@@ -109,3 +109,4 @@ struct LoginView: View {
         .ignoresSafeArea()
         .background(Image("backround"))
 }
+

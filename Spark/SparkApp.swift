@@ -4,7 +4,6 @@
 //
 //  Created by Nico Prinz on 11.11.24.
 //
-
 import SwiftUI
 import SwiftData
 
