@@ -21,4 +21,17 @@ class Author: Identifiable, Hashable {
         self.quotes = quotes
         self.imageAuthor = imageAuthor
     }
+    static func createRandomAuthor(modelContext: ModelContext) {
+        let authors: [Author] = [
+            Author(name: "Albert Einstein", imageAuthor: "AlbertEinstein"),
+            Author(name: "Mark Twain - Das Genie", imageAuthor: "MarkTwain"),
+            Author(name: "Johann Wolfgang von Goethe", imageAuthor: "MarkTwain"),
+            Author(name: "Friedrich Schiller", imageAuthor: "MarkTwain"),
+        ]
+          authors.forEach { author in
+              let newAuthor = author
+                           
+              modelContext.insert(newAuthor)
+          }
+      }
 }

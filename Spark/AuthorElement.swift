@@ -57,9 +57,18 @@ struct AuthorElement: View {
     }
 }
 
-#Preview {
+/*#Preview {
     AuthorElement(author: Author(name: "", imageAuthor: ""))
         .modelContainer(for: [Author.self, Quote.self], inMemory: true)
         .ignoresSafeArea()
-}
+}*/
 
+#Preview {
+ let config = ModelConfiguration(isStoredInMemoryOnly: true)
+ let container = try! ModelContainer(for: Author.self,
+                                     configurations: config)
+ 
+ let _ = Author.createRandomAuthor(modelContext: container.mainContext)
+ AuthorRandomView()
+     .modelContainer(container)
+}

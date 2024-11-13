@@ -80,7 +80,7 @@ struct LoginView: View {
         //Prüfe ob der Author exestiert.
         if let existingAuthor = authors.first(where: { $0.name == authorName }) {
             //Erstelle und speicher ein neues Qoute mit dem gefundenen Autor
-            let newQuote = Quote(title: title, author: existingAuthor, isFavorite: false, category: category)
+            let newQuote = Quote(title: title, author: existingAuthor, category: category)
             modelContext.insert(newQuote)
             try? modelContext.save()
             print("Ein neuer Quote geladen")
