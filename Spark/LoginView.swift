@@ -38,6 +38,8 @@ struct LoginView: View {
                         if quotes.isEmpty {
                             createQuote(withAuthorNamed: "Albert Einstein", title: "Phantasie ist wichtiger als Wissen.", category: .freiheit)
                             createQuote(withAuthorNamed: "Albert Einstein", title: "Das Schönste, was wir erleben können, ist das Geheimnisvolle.", category: .erfolg)
+                            createQuote(withAuthorNamed: "Johann Wolfgang von Goethe", title: "Auch aus Steinen, die einem in den Weg gelegt werden, kann man Schönes bauen.", category: .mut)
+                            createQuote(withAuthorNamed: "Johann Wolfgang von Goethe", title: "Man reist nicht, um anzukommen, sondern um zu reisen.", category: .freiheit)
                         }
                     }
                 Text("quote & you")

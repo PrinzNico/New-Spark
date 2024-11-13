@@ -51,23 +51,17 @@ struct QuoteElement: View {
                         }
 
                     }
-                    .tint(Color.black.gradient)
+                    .tint(Color.black)
                     Spacer()
                 }
                 .sheet(item: $selectedQuote) { quoteDetail in
-                    QuoteElement(quote: quoteDetail)
+                    SheetDetailView(quote: quoteDetail)
                 }
             }
             .presentationDetents([.medium])
         }
     }
 }
-
-/*#Preview {
-    QuoteElement(quote: Quote(title: "", author: Author(name: "", imageAuthor: ""), isFavorite: false, category: .freiheit))
-        .modelContainer(for: [Author.self, Quote.self], inMemory: true)
-        .ignoresSafeArea()
-}*/
 
 #Preview {
  let config = ModelConfiguration(isStoredInMemoryOnly: true)

@@ -30,9 +30,10 @@ class Quote: Identifiable, Hashable {
             
             Quote( title: "Das Schönste, was wir erleben können, ist das Geheimnisvolle.",author: Author(name: "Albert Einstein", imageAuthor: "AlbertEinstein"), category: .erfolg),
             
-            Quote( title: "Auch aus Steinen, die einem in den Weg gelegt werden, kann man Schönes bauen.",author: Author(name: "Johann Wolfgang von Goethe", imageAuthor: "JohannWolfgangVonGoethe"), category: .mut),
+            /*Quote( title: "Auch aus Steinen, die einem in den Weg gelegt werden, kann man Schönes bauen.",author: Author(name: "Johann Wolfgang von Goethe", imageAuthor: "JohannWolfgangVonGoethe"), category: .mut),
             
             Quote( title: "Man reist nicht, um anzukommen, sondern um zu reisen.",author: Author(name: "Johann Wolfgang Von Goethe", imageAuthor: "JohannWolfgangVonGoethe"), category: .freiheit),
+             */
             
         ]
           quotes.forEach { quote in
