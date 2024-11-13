@@ -13,11 +13,12 @@ class Author: Identifiable, Hashable {
     var name: String
     var quotes: [Quote]
     var isFavorite: Bool = false
+    var imageAuthor: String
     
-    init(id: UUID = UUID(), name: String, quotes: [Quote] = []) {
+    init(id: UUID = UUID(), name: String, quotes: [Quote] = [], imageAuthor: String) {
         self.id = id
         self.name = name
         self.quotes = quotes
-        
+        self.imageAuthor = imageAuthor
     }
 }
