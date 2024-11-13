@@ -38,6 +38,8 @@ struct LoginView: View {
                         if quotes.isEmpty {
                             createQuote(withAuthorNamed: "Albert Einstein", title: "Phantasie ist wichtiger als Wissen.", category: .freiheit)
                             createQuote(withAuthorNamed: "Albert Einstein", title: "Das Schönste, was wir erleben können, ist das Geheimnisvolle.", category: .erfolg)
+                            createQuote(withAuthorNamed: "Johann Wolfgang von Goethe", title: "Auch aus Steinen, die einem in den Weg gelegt werden, kann man Schönes bauen.", category: .mut)
+                            createQuote(withAuthorNamed: "Johann Wolfgang von Goethe", title: "Man reist nicht, um anzukommen, sondern um zu reisen.", category: .freiheit)
                         }
                     }
                 Text("quote & you")
@@ -80,7 +82,7 @@ struct LoginView: View {
         //Prüfe ob der Author exestiert.
         if let existingAuthor = authors.first(where: { $0.name == authorName }) {
             //Erstelle und speicher ein neues Qoute mit dem gefundenen Autor
-            let newQuote = Quote(title: title, author: existingAuthor, isFavorite: false, category: category)
+            let newQuote = Quote(title: title, author: existingAuthor, category: category)
             modelContext.insert(newQuote)
             try? modelContext.save()
             print("Ein neuer Quote geladen")

@@ -51,11 +51,11 @@ struct QuoteElement: View {
                         }
 
                     }
-                    .tint(Color.black.gradient)
+                    .tint(Color.black)
                     Spacer()
                 }
-                .sheet(item: $selectedQuote) { detail in
-                    QuoteElement(quote: detail)
+                .sheet(item: $selectedQuote) { quoteDetail in
+                    SheetDetailView(quote: quoteDetail)
                 }
             }
             .presentationDetents([.medium])
@@ -64,8 +64,11 @@ struct QuoteElement: View {
 }
 
 #Preview {
-    QuoteElement(quote: Quote(title: "", author: Author(name: "", imageAuthor: ""), isFavorite: false, category: .freiheit))
-        .modelContainer(for: [Author.self, Quote.self], inMemory: true)
-        .ignoresSafeArea()
+ let config = ModelConfiguration(isStoredInMemoryOnly: true)
+ let container = try! ModelContainer(for: Quote.self,
+                                     configurations: config)
+ 
+ let _ = Quote.createRandomQuote(modelContext: container.mainContext)
+ QuoteRandomView()
+     .modelContainer(container)
 }
-
