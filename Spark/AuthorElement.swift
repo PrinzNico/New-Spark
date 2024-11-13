@@ -23,14 +23,12 @@ struct AuthorElement: View {
                 VStack {
                     Button(action: {
                         showSheet.toggle()
-                        isFavorite.toggle()
                     }) {
                         VStack(alignment: .center) {
                             Text(author.name)
                                 .multilineTextAlignment(.center)
                                 .font(.custom("comfortaa.ttf", size: 20))
                                 .tint(Color.white.gradient)
-                                .padding() // wert einsetzen
                                 .padding()
                             Spacer()
                                 .tint(Color.white.gradient)

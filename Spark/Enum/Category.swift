@@ -18,3 +18,6 @@ enum Category: String, Identifiable, CaseIterable, Codable {
     
     var id: String { rawValue }
 }
+
+
+
