@@ -24,7 +24,7 @@ struct QuoteRandomView: View {
             Image("newbutton")
                 .offset(x: 70, y: -125)
             if let selectedQuote {
-                QuoteElement(quote: selectedQuote)
+                QuoteElement2(quote: selectedQuote)
                     
                 .padding()
                 .frame(width: 250, height: 250)

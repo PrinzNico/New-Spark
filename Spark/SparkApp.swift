@@ -25,7 +25,7 @@ struct SparkApp: App {
 
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            StaticData()
         }
         .modelContainer(sharedModelContainer)
     }

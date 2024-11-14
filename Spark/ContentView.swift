@@ -15,7 +15,7 @@ struct ContentView: View {
     var body: some View {
         TabView {
             Tab ("Zitat", systemImage: "quote.bubble.fill.rtl") {
-                QuoteRandomView()
+                QuoteRandomView2()
             }
             Tab("Favorit", systemImage: "star.square.fill") { //svg. datei vielleicht.
                 FavoritenView()

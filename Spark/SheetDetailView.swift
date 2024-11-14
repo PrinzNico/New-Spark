@@ -1,4 +1,8 @@
-
+//
+// SheetDetailView.swift
+// Spark
+//
+// Created by Nico Prinz on 12.11.24.
 import SwiftUI
 import SwiftData
 
