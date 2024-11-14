@@ -1,32 +1,31 @@
 //
-//  AuthorSheetView.swift
-// Spark
+//  QuotesSheetView.swift
+//  Spark
 //
-//  Created by Nico Prinz on 12.11.24.
-
+//  Created by Nico Prinz on 14.11.24.
+//
 import SwiftUI
 import SwiftData
 
-struct AuthorSheetView: View {
+struct QuotesSheetView: View {
     @Environment(\.modelContext) var modelContext
     @Query(sort: \Author.name) private var authors: [Author]
     @Query(sort: \Quote.title) private var quotes: [Quote]
     @Query(filter: #Predicate<Author> { $0.isFavorite }) private var favoriteAuthor: [Author]
     @State private var selectedAuthor: Author? = nil
-    var author: Author
+    var quote: Quote
     
-    init(author: Author) {
-        self.author = author
+    init(quote: Quote) {
+        self.quote = quote
     }
-    
     var body: some View {
         NavigationStack {
             VStack {
                 HStack {
-                    Text("\(author.name)")
+                    Text("\(quote.author.name)")
                         .font(.largeTitle)
-                        .tint(Color.black.gradient)
-                    Image(author.imageAuthor)
+                        .tint(Color.white.gradient)
+                    Image(quote.author.imageAuthor)
                         .resizable()
                         .scaledToFill()
                         .frame(width: 50, height: 50)       // Zielrahmen für den Bildausschnitt
@@ -36,16 +35,15 @@ struct AuthorSheetView: View {
                         .shadow(radius: 5)
                 }
                 Divider()
-                    .tint(Color.black.gradient)
+                    .tint(Color.white.gradient)
                     .padding()
                 List {
-                    ForEach(author.quotes) { quote in
+                    ForEach(quote.author.quotes) { quote in
                         NavigationLink(destination: QuoteDetailView(quote: quote), label: {
                             HStack {
                                 Text("\(quote.title)")
                                     .font(.headline)
-                                Divider()
-                                    .padding()
+                                Spacer()
                             }
                         })
                     }
@@ -53,7 +51,7 @@ struct AuthorSheetView: View {
             }
         }
         .padding()
-        .presentationDetents([.medium])
+        .presentationDetents([.height(650)])
     }
     private func updateQuoteInAuthors() {
         for quote in quotes {
@@ -70,8 +68,8 @@ struct AuthorSheetView: View {
     let container = try! ModelContainer(for: Quote.self,
                                         configurations: config)
     
-    let _ = Author.createRandomAuthor(modelContext: container.mainContext)
-    AuthorSheetView(author: Author(name: "Albert Eintein", imageAuthor: "AlbertEinstein"))
+    let _ = Quote.createRandomQuote(modelContext: container.mainContext)
+    QuotesSheetView(quote: Quote(title: "", author: Author(name: "", imageAuthor: ""), category: .freiheit))
         .modelContainer(container)
         .ignoresSafeArea(.all)
 }

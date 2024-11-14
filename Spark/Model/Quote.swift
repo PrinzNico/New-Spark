@@ -25,21 +25,14 @@ class Quote: Identifiable, Hashable {
     }
     static func createRandomQuote(modelContext: ModelContext) {
         let quotes: [Quote] = [
-            
             Quote( title: "Phantasie ist wichtiger als Wissen.",author: Author(name: "Albert Einstein", imageAuthor: "AlbertEinstein"), category: .freiheit),
             
             Quote( title: "Das Schönste, was wir erleben können, ist das Geheimnisvolle.",author: Author(name: "Albert Einstein", imageAuthor: "AlbertEinstein"), category: .erfolg),
-            
-            /*Quote( title: "Auch aus Steinen, die einem in den Weg gelegt werden, kann man Schönes bauen.",author: Author(name: "Johann Wolfgang von Goethe", imageAuthor: "JohannWolfgangVonGoethe"), category: .mut),
-            
-            Quote( title: "Man reist nicht, um anzukommen, sondern um zu reisen.",author: Author(name: "Johann Wolfgang Von Goethe", imageAuthor: "JohannWolfgangVonGoethe"), category: .freiheit),
-             */
-            
         ]
-          quotes.forEach { quote in
-              let newQuote = quote
-                           
-              modelContext.insert(newQuote)
-          }
-      }
+        quotes.forEach { quote in
+            let newQuote = quote
+            
+            modelContext.insert(newQuote)
+        }
+    }
 }

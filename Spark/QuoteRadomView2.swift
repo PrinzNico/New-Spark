@@ -12,42 +12,45 @@ struct QuoteRandomView2: View {
     @Query(sort: \Quote.title) private var quotes: [Quote]
     @State private var showSheet: Bool = false
     @State private var selectedQuote: Quote? = nil
+    
     var body: some View {
-        VStack(){
-            ZStack{ Rectangle()
-                    .foregroundColor(.clear)
-                    .frame(width: 380, height: 566)
-                    .background()
-                    .cornerRadius(30)
-                    .foregroundStyle(.gray)
-                    .shadow(radius: 3).gaugeStyle(.accessoryCircularCapacity)
-                
-                if let unwrapname = selectedQuote {
-                    Image("\(unwrapname.author.imageAuthor)")
-                }
-                
-                VStack{
-                    if let selectedQuote {
-                        QuoteElement2(quote: selectedQuote)
-                        
-                            .padding()
-                            .frame(width: 250, height: 250)
+        TabView {
+            Tab {
+                VStack(){
+                    ZStack{ Rectangle()
+                            .foregroundColor(.clear)
+                            .frame(width: 380, height: 566)
+                            .background()
+                            .cornerRadius(30)
+                            .foregroundStyle(.gray)
+                            .shadow(radius: 3).gaugeStyle(.accessoryCircularCapacity)
+                        if let unwrapname = selectedQuote {
+                            Image("\(unwrapname.author.imageAuthor)")
+                        }
+                        VStack{
+                            if let selectedQuote {
+                                QuoteElement2(quote: selectedQuote)
+                                    .padding()
+                                    .frame(width: 250, height: 250)
+                            }
+                        }
+                        .onAppear {
+                            selectedQuote = quotes.randomElement()
+                        }
+                        Button(action:  {
+                            selectedQuote = quotes.randomElement()
+                        }) {
+                            Image("Siegel")
+                        }
+                        .position(x: 320 , y: 650 )
                     }
-                    
-                    
                 }
-                .onAppear {
-                    selectedQuote = quotes.randomElement()
-                }
-                Button(action:  {
-                    selectedQuote = quotes.randomElement()
-                }) {
-                    Image("Siegel")
-                }
-                .position(x: 320 , y: 650 )
+            }
+            Tab {
+                SortedQuotesView()
             }
         }
-        
+        .tabViewStyle(.page)
     }
 }
 
@@ -60,4 +63,5 @@ struct QuoteRandomView2: View {
     ContentView()
         .modelContainer(container)
         .ignoresSafeArea(.all)
+        .background(Color.black.gradient)
 }

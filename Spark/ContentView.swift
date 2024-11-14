@@ -21,15 +21,20 @@ struct ContentView: View {
                 FavoritenView()
             }
             Tab("Author", systemImage: "person.crop.square.on.square.angled.fill") { //svg. datei vielleicht. -> geht nicht
-                AuthorRandomView()
+                AuthorView()
             }
         }
+        .navigationBarBackButtonHidden()
     }
-    
 }
 
-
 #Preview {
+    let config = ModelConfiguration(isStoredInMemoryOnly: true)
+    let container = try! ModelContainer(for: Quote.self,
+                                        configurations: config)
+    
+    let _ = Quote.createRandomQuote(modelContext: container.mainContext)
     ContentView()
-        .modelContainer(for: [Author.self, Quote.self], inMemory: true)
+        .modelContainer(container)
+        .ignoresSafeArea(.all)
 }

@@ -4,12 +4,10 @@
 //
 //  Created by Nico Prinz on 11.11.24.
 //
-
 import Foundation
 import SwiftData
 
 enum Category: String, Identifiable, CaseIterable, Codable {
-    
     case erfolg = "Motivation & Erfolg"
     case mut = "Mut & Durchhaltevermögen"
     case zeit = "Vergänglichkeit & Zeit"

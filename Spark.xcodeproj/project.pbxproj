@@ -11,7 +11,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		A240956C2CE2BA3E00CA7C4C /* Exceptions for "Spark" folder in "Spark" target */ = {
+		A2B055782CE68EB200B0F566 /* Exceptions for "Spark" folder in "Spark" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -21,10 +21,10 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		A24095152CE2B31B00CA7C4C /* Spark */ = {
+		A2B055602CE68EB200B0F566 /* Spark */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				A240956C2CE2BA3E00CA7C4C /* Exceptions for "Spark" folder in "Spark" target */,
+				A2B055782CE68EB200B0F566 /* Exceptions for "Spark" folder in "Spark" target */,
 			);
 			path = Spark;
 			sourceTree = "<group>";
@@ -45,7 +45,7 @@
 		A240950A2CE2B31B00CA7C4C = {
 			isa = PBXGroup;
 			children = (
-				A24095152CE2B31B00CA7C4C /* Spark */,
+				A2B055602CE68EB200B0F566 /* Spark */,
 				A24095142CE2B31B00CA7C4C /* Products */,
 			);
 			sourceTree = "<group>";
@@ -74,7 +74,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				A24095152CE2B31B00CA7C4C /* Spark */,
+				A2B055602CE68EB200B0F566 /* Spark */,
 			);
 			name = Spark;
 			packageProductDependencies = (
