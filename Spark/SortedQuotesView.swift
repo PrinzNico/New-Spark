@@ -7,12 +7,14 @@
 import SwiftUI
 import SwiftData
 struct SortedQuotesView: View {
-    @Environment(\.modelContext) private var context
+    @Environment(\.modelContext) var modelContext
+    @Environment(\.dismiss) var dismiss
     @Query private var quotes: [Quote]
     @Query(sort: \Quote.title) private var sortedQuotesTitel: [Quote]
     @State private var selectedCategory: Category = .freiheit
     @State private var selectedQuote: Quote?
     @State private var showSheet: Bool = false
+    @State private var showAlert: Bool = false
        
     var body: some View {
         NavigationStack {
@@ -45,9 +47,31 @@ struct SortedQuotesView: View {
                                             .font(.custom("comfortaa.ttf", size: 13))
                                             .tint(.primary)
                                         Spacer()
-                                        Image(systemName: quote.isFavorite ? "star.fill" : "star")
-                                            .foregroundColor(quote.isFavorite ? .yellow : .white)
-                                            .padding()
+                                        Button(action: {
+                                            if quote.isFavorite {
+                                                showAlert = true
+                                            } else {
+                                                quote.isFavorite.toggle()
+                                                try? modelContext.save()
+                                            }
+                                            
+                                        }){
+                                            Image(systemName: quote.isFavorite ? "star.fill" : "star")
+                                                .foregroundColor(quote.isFavorite ? .yellow : .white)
+                                                .padding()
+                                        }
+                                        .alert("Eintrag aus Favoriten löschen", isPresented: $showAlert) {
+                                            Button("Nein", role: .cancel) {
+                                                showAlert = false
+                                            }
+                                            Button("Entfavorisieren", role: .destructive) {
+                                                quote.isFavorite = false
+                                                try? modelContext.save()
+                                                dismiss()
+                                            }
+                                        } message: {
+                                            Text("Listeneintrag entfavorisieren!")
+                                        }
                                     }
                                     .buttonStyle(PlainButtonStyle())
                                 }

@@ -7,6 +7,7 @@
 import SwiftUI
 import SwiftData
 
+
 struct QuotesSheetView: View {
     @Environment(\.modelContext) var modelContext
     @Query(sort: \Author.name) private var authors: [Author]
@@ -24,7 +25,7 @@ struct QuotesSheetView: View {
                 HStack {
                     Text("\(quote.author.name)")
                         .font(.largeTitle)
-                        .tint(Color.white.gradient)
+                        .tint(Color.primary)
                     Image(quote.author.imageAuthor)
                         .resizable()
                         .scaledToFill()
@@ -35,7 +36,7 @@ struct QuotesSheetView: View {
                         .shadow(radius: 5)
                 }
                 Divider()
-                    .tint(Color.white.gradient)
+                    .tint(Color.primary)
                     .padding()
                 List {
                     ForEach(quote.author.quotes) { quote in
@@ -48,10 +49,11 @@ struct QuotesSheetView: View {
                         })
                     }
                 }
+                .scrollContentBackground(.hidden)
             }
         }
         .padding()
-        .presentationDetents([.height(650)])
+        .presentationDetents([.height(670)])
     }
     private func updateQuoteInAuthors() {
         for quote in quotes {

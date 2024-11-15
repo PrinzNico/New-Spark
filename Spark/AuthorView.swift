@@ -38,6 +38,7 @@ struct AuthorView: View {
             .sheet(item: $selectedAuthor) { author in
                 AuthorSheetView(author: author)  // Zeigt `AuthorSheetView` für den ausgewählten Autor
                     .presentationDetents([.height(650)])
+                    .presentationDragIndicator(.visible)
             }
         }
     }

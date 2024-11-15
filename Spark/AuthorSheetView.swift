@@ -51,6 +51,7 @@ struct AuthorSheetView: View {
                         })
                     }
                 }
+                .scrollContentBackground(.hidden)
             }
         }
         .padding()

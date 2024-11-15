@@ -6,12 +6,18 @@
 //
 import SwiftUI
 import SwiftData
+import UIKit
 
 struct QuoteDetailView: View {
-    @Environment(\.modelContext) var context
+    @Environment(\.modelContext) var modelContext
+    @Environment(\.dismiss) var dismiss
     @Query(sort: \Author.name) private var authors: [Author]
     @Query(sort: \Quote.title) private var quotes: [Quote]
     @State private var showSheet: Bool = false
+    @State private var showShareSheet: Bool = false
+    @State private var shareImage: UIImage? = nil
+    @State private var showAlert: Bool = false
+    
     var quote: Quote
     
     init(quote: Quote) {
@@ -55,7 +61,7 @@ struct QuoteDetailView: View {
                     .shadow(radius: 2)
                 Button(action:  {
                     quote.isFavorite.toggle()
-                    try? context.save()
+                    try? modelContext.save()
                 }) {
                     Image(quote.isFavorite ? "star 1" : "starempty")
                         .resizable()
@@ -63,8 +69,32 @@ struct QuoteDetailView: View {
                 }
             }
         }
+        .overlay(
+            Button("Zitat als Photo speichern"){
+                saveAndShare(view: QuoteDetailView(quote: quote))
+            }
+                .buttonStyle(.borderedProminent)
+                .tint(.yellow)
+                .foregroundStyle(.black)
+                .padding(.vertical, -9)
+            , alignment: .bottom)
+        .sheet(isPresented: $showShareSheet, content: {
+            if let shareImage = shareImage {
+                SaveAndShare(image: shareImage)
+                
+            }
+            
+        })
         .navigationTitle("Zitat Details")
         .presentationDetents([.height(300)])
+    }
+    func saveAndShare(view: some View){
+        let renderer = ImageRenderer(content: view.frame(width: 380, height: 570))
+        if let uiImage = renderer.uiImage {
+            self.shareImage = uiImage
+            self.showShareSheet = true
+            UIImageWriteToSavedPhotosAlbum(uiImage, nil, nil, nil)
+        }
     }
 }
 

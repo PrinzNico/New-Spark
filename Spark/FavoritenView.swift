@@ -8,14 +8,17 @@ import SwiftUI
 import SwiftData
 
 struct FavoritenView: View {
+    @Environment(\.modelContext) var modelContext
+    @Environment(\.dismiss) var dismiss
     @Query(filter: #Predicate<Quote> { $0.isFavorite }) private var favoriteQuotes: [Quote]
     @State private var selectedQuote: Quote?
     @State private var showSheet: Bool = false
+    @State private var showAlert: Bool = false
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(favoriteQuotes) { favquote in
+                ForEach(favoriteQuotes, id: \.self) { favquote in
                     Button(action: {
                         selectedQuote = favquote
                         showSheet.toggle()
@@ -24,15 +27,32 @@ struct FavoritenView: View {
                             VStack(alignment: .leading) {
                                 Text("\(favquote.title)")
                                     .font(.custom("comfortaa.ttf", size: 20))
-                                    .tint(Color.white.gradient)
+                                    .tint(Color.primary)
                                 HStack {
                                     Text("\(favquote.author.name)")
                                         .font(.custom("comfortaa.ttf", size: 13))
-                                        .tint(Color.white.gradient)
+                                        .tint(Color.primary)
                                     Spacer()
-                                    Image(systemName: favquote.isFavorite ? "star.fill" : "star")
-                                        .foregroundColor(favquote.isFavorite ? .yellow : .white)
-                                        .padding()
+                                    Button(action: {
+                                        
+                                        showAlert = true
+                                    }){
+                                        Image(systemName: favquote.isFavorite ? "star.fill" : "star")
+                                            .foregroundColor(favquote.isFavorite ? .yellow : .white)
+                                            .padding()
+                                    }
+                                    .alert("Eintrag aus Favoriten löschen", isPresented: $showAlert) {
+                                        Button("Nein", role: .cancel) {
+                                            showAlert = false
+                                        }
+                                        Button("Entfavorisieren", role: .destructive) {
+                                            favquote.isFavorite = false
+                                            try? modelContext.save()
+                                            dismiss()
+                                        }
+                                    } message: {
+                                        Text("Listeneintrag entfavorisieren!")
+                                    }
                                 }
                             }
                         }

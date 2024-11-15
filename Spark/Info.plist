@@ -11,5 +11,7 @@
         <string>Comfortaa-Regular.ttf</string>
 		<string>comfortaa.ttf</string>
 	</array>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>Beschreibung, warum du Zugriff benötigst, z. B. „Bild speichern“</string>
 </dict>
 </plist>
