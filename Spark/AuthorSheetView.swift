@@ -25,7 +25,7 @@ struct AuthorSheetView: View {
                 HStack {
                     Text("\(author.name)")
                         .font(.largeTitle)
-                        .tint(Color.black.gradient)
+                        .tint(.primary)
                     Image(author.imageAuthor)
                         .resizable()
                         .scaledToFill()
@@ -36,7 +36,7 @@ struct AuthorSheetView: View {
                         .shadow(radius: 5)
                 }
                 Divider()
-                    .tint(Color.black.gradient)
+                    .foregroundStyle(.primary)
                     .padding()
                 List {
                     ForEach(author.quotes) { quote in
@@ -44,6 +44,7 @@ struct AuthorSheetView: View {
                             HStack {
                                 Text("\(quote.title)")
                                     .font(.headline)
+                                    .tint(.primary)
                                 Divider()
                                     .padding()
                             }
@@ -53,7 +54,6 @@ struct AuthorSheetView: View {
             }
         }
         .padding()
-        .presentationDetents([.medium])
     }
     private func updateQuoteInAuthors() {
         for quote in quotes {

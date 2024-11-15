@@ -27,6 +27,7 @@ struct AuthorView: View {
                         .shadow(radius: 5)
                     Divider()
                     Text(author.name)
+                        .tint(.primary)
                 }
                 .contentShape(Rectangle())  // Damit der gesamte Bereich anklickbar ist
                 .onTapGesture {

@@ -74,7 +74,7 @@ struct QuoteDetailView: View {
                                         configurations: config)
     
     let _ = Quote.createRandomQuote(modelContext: container.mainContext)
-    QuoteDetailView(quote: Quote(title: "", author: Author(name: "Albert Einstein", imageAuthor: "AlbertEinstein"), category: .freiheit))
+    QuoteDetailView(quote: Quote(title: "Glaube nicht an das was du nicht siehst", author: Author(name: "Albert Einstein", imageAuthor: "AlbertEinstein"), category: .freiheit))
         .modelContainer(container)
         .ignoresSafeArea(.all)
 }

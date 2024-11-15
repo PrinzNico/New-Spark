@@ -21,7 +21,7 @@ struct SortedQuotesView: View {
                     ForEach(Category.allCases, id: \.self) { category in
                         Text("\(category.rawValue)")
                             .tag(category.rawValue)
-                            .foregroundStyle(.gray)
+                            .tint(.primary)
                             .shadow(radius: 3).contrast(3)
                     }
                 }
@@ -39,11 +39,11 @@ struct SortedQuotesView: View {
                                 VStack(alignment: .leading) {
                                     Text("\(quote.title)")
                                         .font(.custom("comfortaa.ttf", size: 20))
-                                        .tint(Color.white.gradient)
+                                        .tint(.primary)
                                     HStack {
                                         Text("\(quote.author.name)")
                                             .font(.custom("comfortaa.ttf", size: 13))
-                                            .tint(Color.white.gradient)
+                                            .tint(.primary)
                                         Spacer()
                                         Image(systemName: quote.isFavorite ? "star.fill" : "star")
                                             .foregroundColor(quote.isFavorite ? .yellow : .white)

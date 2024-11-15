@@ -27,6 +27,7 @@ struct QuoteElement2: View {
                         .frame(width: 110)
                     Text(quote.author.name)
                         .font(.title)
+                        .tint(.primary)
                         .lineLimit(3)
                         .minimumScaleFactor(0.5)
                         .frame(width: 140, height: 140, alignment: .center)
@@ -41,13 +42,13 @@ struct QuoteElement2: View {
                     .padding()
                 Text(quote.category.rawValue)
                     .font(.custom("comfortaa.ttf", size: 12))
-                    .tint(Color.black.gradient)
+                    .tint(.primary)
                 Divider()
-                    .tint(Color.black.gradient)
+                    .tint(.primary)
                     .shadow(radius: 2)
                 Button(action:  {
                     quote.isFavorite.toggle()
-                    printdetails()
+                    try? context.save()
                 }) {
                     Image(quote.isFavorite ? "star 1" : "starempty")
                         .resizable()
@@ -55,9 +56,6 @@ struct QuoteElement2: View {
                 }
             }
         }
-    }
-    private func printdetails() {
-        print("\(quote.isFavorite)")
     }
 }
 

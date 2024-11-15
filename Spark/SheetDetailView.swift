@@ -23,7 +23,9 @@ struct SheetDetailView: View {
             Image(quote.author.imageAuthor)
             VStack{
                 HStack(){
-                    Spacer()
+                    Spacer(minLength: 80)
+                        .padding(.horizontal, 30)
+                    
                     Text(quote.author.name)
                         .font(.title)
                         .lineLimit(3)

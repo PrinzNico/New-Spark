@@ -45,7 +45,8 @@ struct FavoritenView: View {
                 }
             }
             .padding()
-            .navigationTitle("Favoriten").tint(Color.white.gradient)
+            .navigationTitle("Favoriten")
+            .tint(.primary)
             .scrollContentBackground(.hidden)
         }
     }
