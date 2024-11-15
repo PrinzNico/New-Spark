@@ -4,10 +4,11 @@
 //
 //  Created by Nico Prinz on 12.11.24.
 //
+//MARK: - Hier werden zufällige Zitate angezeigt. Bei jedem neuen laden des Views wird ein zufälliges Zitat angezeigt. Das mitunter auch mit einem Button refresht werden kann. Die View hat eine TabView die mit der SortedView verbunden ist. In dem Page - Style (die View wechselt wenn man nach rechts wischt.)
 import SwiftUI
 import SwiftData
 
-struct QuoteRandomView2: View {
+struct QuoteRandomView: View {
     @Query(sort: \Author.name) private var authors: [Author]
     @Query(sort: \Quote.title) private var quotes: [Quote]
     @State private var showSheet: Bool = false
@@ -29,7 +30,7 @@ struct QuoteRandomView2: View {
                         }
                         VStack{
                             if let selectedQuote {
-                                QuoteElement2(quote: selectedQuote)
+                                QuoteElement(quote: selectedQuote)
                                     .padding()
                                     .frame(width: 250, height: 250)
                             }

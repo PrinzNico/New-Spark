@@ -4,6 +4,7 @@
 //
 //  Created by Nico Prinz on 11.11.24.
 //
+//MARK: - Hier werden die Favorieten die von dem User gespeichert werden als Liste angezeigt und als sheets im Detail angezeigt werden können. Hier ist das besondere der .altert in dem ich den User nochmal darauf hinweise das Zitat zu ent Favorisieren. Dies kann er abbrechen oder auch Aktzeptieren.
 import SwiftUI
 import SwiftData
 
@@ -12,15 +13,15 @@ struct FavoritenView: View {
     @Environment(\.dismiss) var dismiss
     @Query(filter: #Predicate<Quote> { $0.isFavorite }) private var favoriteQuotes: [Quote]
     @State private var selectedQuote: Quote?
-    @State private var showSheet: Bool = false
-    @State private var showAlert: Bool = false
+    @State private var showSheet: Bool = false ///für den Sheet
+    @State private var showAlert: Bool = false ///für den .altert
     
     var body: some View {
         NavigationStack {
             List {
                 ForEach(favoriteQuotes, id: \.self) { favquote in
                     Button(action: {
-                        selectedQuote = favquote
+                       
                         showSheet.toggle()
                     }){
                         Section {

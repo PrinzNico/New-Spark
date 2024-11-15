@@ -4,6 +4,7 @@
 //
 //  Created by Nico Prinz on 11.11.24.
 //
+//MARK: - Diese View ist selbsterklärend.
 import SwiftUI
 import SwiftData
 
@@ -15,14 +16,14 @@ struct SparkApp: App {
             Quote.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
+        
         do {
             return try ModelContainer(for: schema, configurations: [modelConfiguration])
         } catch {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
-
+    
     var body: some Scene {
         WindowGroup {
             StaticData()

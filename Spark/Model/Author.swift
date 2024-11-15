@@ -4,6 +4,8 @@
 //
 //  Created by Nico Prinz on 11.11.24.
 //
+//MARK: - Hier bestimmen wir die Classe Author und fügen mit @Model zu einem Model als Container hinzu. Das besondere ist die PREVIEW - static func um in der Preview arbeiten zu können.
+
 import Foundation
 import SwiftData
 

@@ -4,20 +4,17 @@
 //
 //  Created by Nico Prinz on 14.11.24.
 //
+//MARK: - Hier wird das einzelne Quote mit Inhalt und Images angezeigt. Das besondere auf dieser View ist neben dem Favoriten Button auch der Share Button der dann auf der toolbar angezeigt wird wenn diese View z.B. durch .sheet aufgerufen wird. (Dieser Z - Stack z.b diese View wird als Image erstellt zum abspeichern)
 import SwiftUI
 import SwiftData
-import UIKit
+import UIKit ///besonderer Import für das erstellen von Images und diese zu Speichern in den Bildern
 
 struct QuoteDetailView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(\.dismiss) var dismiss
-    @Query(sort: \Author.name) private var authors: [Author]
-    @Query(sort: \Quote.title) private var quotes: [Quote]
-    @State private var showSheet: Bool = false
-    @State private var showShareSheet: Bool = false
-    @State private var shareImage: UIImage? = nil
-    @State private var showAlert: Bool = false
-    
+    @Query(sort: \Quote.title) private var quotes: [Quote] /// brauchen wir natürlich
+    @State private var showShareSheet: Bool = false /// für die anzeige des Sheets
+    @State private var shareImage: UIImage? = nil /// hier bestimmen wir Optional ein UIImage das ausgewählt wurde. wenn nicht nil.
     var quote: Quote
     
     init(quote: Quote) {
@@ -41,6 +38,7 @@ struct QuoteDetailView: View {
                     Divider()
                         .frame(width: 110, height: 110)
                     Text(quote.author.name)
+                        .tint(.primary)
                         .font(.title)
                         .lineLimit(3)
                         .minimumScaleFactor(0.5)
@@ -48,20 +46,19 @@ struct QuoteDetailView: View {
                 }
                 Text(quote.title)
                     .font(.headline)
+                    .tint(.primary)
                     .lineLimit(8) // max. 8 Zeilen
                     .minimumScaleFactor(0.7)// min. 70% der Schriftgröße
                     .multilineTextAlignment(.center)
                     .frame(width: 270, height: 190)
                     .padding()
                 Text(quote.category.rawValue)
-                    .font(.custom("comfortaa.ttf", size: 12))
-                    .tint(Color.black.gradient)
-                Divider()
-                    .tint(Color.black.gradient)
-                    .shadow(radius: 2)
+                    .font(.custom("comfortaa.ttf", size: 14))
+                    .fontWeight(.bold)
+                    .tint(.primary)
+                
                 Button(action:  {
                     quote.isFavorite.toggle()
-                    try? modelContext.save()
                 }) {
                     Image(quote.isFavorite ? "star 1" : "starempty")
                         .resizable()
@@ -69,21 +66,21 @@ struct QuoteDetailView: View {
                 }
             }
         }
-        .overlay(
-            Button("Zitat als Photo speichern"){
-                saveAndShare(view: QuoteDetailView(quote: quote))
+        .toolbar {
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button(action: {
+                    saveAndShare(view: QuoteDetailView(quote: quote))
+                    
+                }) {
+                    Image(systemName: "square.and.arrow.down")
+                }
             }
-                .buttonStyle(.borderedProminent)
-                .tint(.yellow)
-                .foregroundStyle(.black)
-                .padding(.vertical, -9)
-            , alignment: .bottom)
+        }
+        .foregroundColor(.primary)
         .sheet(isPresented: $showShareSheet, content: {
             if let shareImage = shareImage {
                 SaveAndShare(image: shareImage)
-                
             }
-            
         })
         .navigationTitle("Zitat Details")
         .presentationDetents([.height(300)])

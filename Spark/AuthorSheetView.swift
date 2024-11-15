@@ -3,16 +3,13 @@
 // Spark
 //
 //  Created by Nico Prinz on 12.11.24.
-
+//MARK: - In dieser View bestimmen wir den einzelnen Author und füttern die UI mit seinen Informationen.
 import SwiftUI
 import SwiftData
 
 struct AuthorSheetView: View {
     @Environment(\.modelContext) var modelContext
-    @Query(sort: \Author.name) private var authors: [Author]
-    @Query(sort: \Quote.title) private var quotes: [Quote]
-    @Query(filter: #Predicate<Author> { $0.isFavorite }) private var favoriteAuthor: [Author]
-    @State private var selectedAuthor: Author? = nil
+    
     var author: Author
     
     init(author: Author) {
@@ -29,10 +26,10 @@ struct AuthorSheetView: View {
                     Image(author.imageAuthor)
                         .resizable()
                         .scaledToFill()
-                        .frame(width: 50, height: 50)       // Zielrahmen für den Bildausschnitt
-                        .scaleEffect(3.5, anchor: .topLeading) // Vergrößert das Bild, fokussiert auf die obere linke Ecke
+                        .frame(width: 50, height: 50) /// Zielrahmen für den Bildausschnitt
+                        .scaleEffect(3.5, anchor: .topLeading) /// Vergrößert das Bild, fokussiert auf die obere linke Ecke
                         .offset(x: -35, y: 10)
-                        .clipShape(Circle())                // Rundes Bild
+                        .clipShape(Circle()) /// Rundes Bild
                         .shadow(radius: 5)
                 }
                 Divider()
@@ -55,14 +52,6 @@ struct AuthorSheetView: View {
             }
         }
         .padding()
-    }
-    private func updateQuoteInAuthors() {
-        for quote in quotes {
-            if let author = authors.first(where: { $0.name == quote.author.name}) {
-                author.quotes.append(quote)
-                try? modelContext.save() /// Speichert die Änderungen
-            }
-        }
     }
 }
 

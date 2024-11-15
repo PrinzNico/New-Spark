@@ -4,6 +4,7 @@
 //
 //  Created by Nico Prinz on 14.11.24.
 //
+//MARK: - Hier werden die Zitate angezeigt die für eine SheetView notwendig ist. Hier ist die besonderheit die Relationship und die Zitate der Authoren zuzuweisen. In einer Funktion daten wir den einzelnen Authoren mit seinen zugehörigen Zitaten up! . Und speichern es in die DatenBank. Das Array von Zitaten die dem Authoren zugewiesen wurden werden mit einer List nun auf der View als ListenElement angezeigt.
 import SwiftUI
 import SwiftData
 
@@ -29,10 +30,10 @@ struct QuotesSheetView: View {
                     Image(quote.author.imageAuthor)
                         .resizable()
                         .scaledToFill()
-                        .frame(width: 50, height: 50)       // Zielrahmen für den Bildausschnitt
-                        .scaleEffect(3.5, anchor: .topLeading) // Vergrößert das Bild, fokussiert auf die obere linke Ecke
+                        .frame(width: 50, height: 50) /// Zielrahmen für den Bildausschnitt
+                        .scaleEffect(3.5, anchor: .topLeading) /// Vergrößert das Bild, fokussiert auf die obere linke Ecke
                         .offset(x: -35, y: 10)
-                        .clipShape(Circle())                // Rundes Bild
+                        .clipShape(Circle()) /// Rundes Bild
                         .shadow(radius: 5)
                 }
                 Divider()
@@ -43,6 +44,7 @@ struct QuotesSheetView: View {
                         NavigationLink(destination: QuoteDetailView(quote: quote), label: {
                             HStack {
                                 Text("\(quote.title)")
+                                    .tint(.primary)
                                     .font(.headline)
                                 Spacer()
                             }

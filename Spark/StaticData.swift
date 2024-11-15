@@ -4,6 +4,8 @@
 //
 //  Created by Robin Bettinghausen on 13.11.24.
 //
+//MARK: - hier werden die Authoren in die Datenbank geladen. Hier wurde als kleines Gadget ein routierendes Image eingebaut das sich um 360 grad um die rechte Obere Achse dreht. Dieses Image ist ein Button und gewählt den Entry in die APP SPARK.
+
 import SwiftUI
 import SwiftData
 
@@ -11,10 +13,9 @@ struct StaticData: View {
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Author.name) private var authors: [Author]
     @Query(sort: \Quote.title) private var quotes: [Quote]
-    @State private var errorMessage = ""
     @State private var isActiv: Bool = false
-    @State private var rotationAngle: Double = 0
-    @State private var isVisible: Bool = true
+    @State private var rotationAngle: Double = 0 /// für das routierende Bild
+    @State private var isVisible: Bool = true /// für den Blinkenden Text
     
     var body: some View {
         NavigationStack {
@@ -258,7 +259,6 @@ struct StaticData: View {
     let config = ModelConfiguration(isStoredInMemoryOnly: true)
     let container = try! ModelContainer(for: Quote.self,
                                         configurations: config)
-    
     let _ = Quote.createRandomQuote(modelContext: container.mainContext)
     StaticData()
         .modelContainer(container)

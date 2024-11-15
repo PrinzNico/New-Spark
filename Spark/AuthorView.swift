@@ -4,14 +4,14 @@
 //
 //  Created by Nico Prinz on 14.11.24.
 //
+//MARK: - In dieser View lassen wir die Authoren die in der DatenBank gespeichert sind in einer Liste anzeigen. Diese haben einen NavigationLink der sie zur AuthorSheetView nagiviert um dort die QuoteDetailView aufrufen zu können im einzelnen.
 import SwiftUI
 import SwiftData
 
 struct AuthorView: View {
     @Environment(\.modelContext) var modelContext
-    @Query(sort: [SortDescriptor(\Author.name, order: .forward)]) private var authors: [Author] // Autoren nach Name sortieren
-    @Query(sort: \Quote.title) private var quotes: [Quote]
-    @State private var selectedAuthor: Author? = nil  // Speichert den ausgewählten Autor für das Sheet
+    @Query(sort: [SortDescriptor(\Author.name, order: .forward)]) private var authors: [Author] /// Autoren nach Name sortieren
+    @State private var selectedAuthor: Author? = nil  /// Speichert den ausgewählten Autor für das Sheet, muss noch abgesichert werden?
     
     var body: some View {
         NavigationStack {
@@ -41,13 +41,6 @@ struct AuthorView: View {
                     .presentationDragIndicator(.visible)
             }
         }
-    }
-    //funktion für nil
-    private func imageOfAuthor(_ name: String?) -> String {
-        guard let imageName = selectedAuthor?.imageAuthor else {
-            return "person.circle.fill"
-        }
-        return imageName
     }
 }
 

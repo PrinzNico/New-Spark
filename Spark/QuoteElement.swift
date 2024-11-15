@@ -3,15 +3,13 @@
 //  Spark
 //
 //  Created by Nico Prinz on 12.11.24.
+//MARK: - Hier wird das einzelne Zitat angezeigt. Und der Favoriten Button betätigt werden.
+
 import SwiftUI
 import SwiftData
 
-struct QuoteElement2: View {
-    @Environment(\.modelContext) var context
-    @Query(sort: \Quote.title) private var quotes: [Quote]
-    @State private var showSheet: Bool = false
-    @State private var selectedQuote: Quote? = nil
-    @State private var isFavorite: Bool = false
+struct QuoteElement: View {
+    @Environment(\.modelContext) var modelContext
     var quote: Quote
     
     init(quote: Quote) {
@@ -48,7 +46,7 @@ struct QuoteElement2: View {
                     .shadow(radius: 2)
                 Button(action:  {
                     quote.isFavorite.toggle()
-                    try? context.save()
+                    try? modelContext.save()
                 }) {
                     Image(quote.isFavorite ? "star 1" : "starempty")
                         .resizable()
